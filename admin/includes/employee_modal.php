@@ -93,6 +93,25 @@
                       </select>
                     </div>
                 </div>
+                <!-- <div class="form-group">
+                    <label for="supervisor" class="col-sm-3 control-label">Supervisor</label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" name="supervisor" id="supervisor">
+                        <option value="">- Select -</option>
+                        <?php 
+                          $sql = "SELECT * FROM employees WHERE position_id = 3";
+                          $query = $conn->query($sql);
+                          while ($row = $query->fetch_assoc()){
+                            echo "
+                              <option value=''></option>
+                              <option value='" . $row["employee_id"] . "'>" . $row["firstname"].' '.$row["lastname"] . "</option>
+                            ";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                </div> -->
                 <div class="form-group">
                     <label for="schedule" class="col-sm-3 control-label">Schedule</label>
 
@@ -252,6 +271,65 @@
     </div>
 </div>
 
+<!-- Assign -->
+<div class="modal fade" id="assign">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          	<div class="modal-header">
+            	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              		<span aria-hidden="true">&times;</span></button>
+            	<!-- <h4 class="modal-title"><b>Add Employee</b></h4> -->
+            	<h4 class="modal-title"><b><span class="employee_id"></span></b></h4>
+          	</div>
+          	<div class="modal-body">
+            	<form class="form-horizontal" method="POST" action="employee_assign.php" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="supervisor" class="col-sm-3 control-label">Supervisor</label>
+                    <div class="col-sm-9">
+                      <select class="form-control" name="supervisor" id="supervisor">
+                        <option value="">- Select -</option>
+                        <?php 
+                          $sql = "SELECT * FROM employees WHERE schedule_id = 1 AND position_id = 3";
+                          // $sql = "SELECT employees.*, schedules.* FROM employees JOIN schedules ON employees.schedule_id = schedules.id WHERE employees.position_id = 3
+                          // UNION SELECT employees.*, schedules.* FROM employees JOIN schedules ON employees.schedule_id = schedules.id WHERE employees.schedule_id = 1 ";
+                          $query = $conn->query($sql);
+                          while ($row = $query->fetch_assoc()){
+                            echo "
+                              <option value='" . $row["employee_id"] . "'>" . $row["firstname"].' '.$row["lastname"] . "</option>
+                            ";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="schedule" class="col-sm-3 control-label">Schedule</label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="schedule" name="schedule" required>
+                        <option value="" selected>- Select -</option>
+                        <?php
+                          $sql = "SELECT * FROM schedules";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['id']."'>".$srow['time_in'].' - '.$srow['time_out']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div> -->
+          	</div>
+          	<div class="modal-footer">
+            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+            	<button type="submit" class="btn btn-primary btn-flat" name="assign"><i class="fa fa-save"></i> Save</button>
+            	</form>
+          	</div>
+        </div>
+    </div>
+</div>
+
 <!-- Delete -->
 <div class="modal fade" id="delete">
     <div class="modal-dialog">
@@ -321,9 +399,27 @@
             	<form class="form-horizontal" method="POST" action="employee_create.php">
             		<input type="hidden" class="id" name="id">
                 <div class="form-group">
+                    <label for="username" class="col-sm-3 control-label">Firstname</label>
+                    <div class="col-sm-9">
+                      <input type='text' class='form-control' name='firstname'>             
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="username" class="col-sm-3 control-label">Lastname</label>
+                    <div class="col-sm-9">
+                      <input type='text' class='form-control' name='lastname'>         
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="photo" class="col-sm-3 control-label">Photo</label>
+
+                    <div class="col-sm-9">
+                      <input type="file" name="photo">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="username" class="col-sm-3 control-label">Username</label>
                     <div class="col-sm-9">
-
                       <input type="text" class="form-control" id="id" name="id" disabled>
                     </div>
                 </div>
@@ -332,6 +428,30 @@
 
                     <div class="col-sm-9">
                       <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="positionid" class="col-sm-3 control-label">Position ID</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="positionid" name="positionid" disabled>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label for="acctype" class="col-sm-3 control-label">Account Type:</label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" name="acctype" id="acctype" required>
+                        <option value="">Select account type</option>
+                        <?php 
+                          $sql = "SELECT description FROM position";
+                          $query = $conn->query($sql);
+                          while ($row = $query->fetch_assoc()){
+                            echo "
+                              <option value='" . $row["description"] . "'>" . $row["description"] . "</option>
+                            ";
+                        }
+                        ?>
+                      </select>
                     </div>
                 </div>
           	</div>

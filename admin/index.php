@@ -3,6 +3,9 @@
   if(isset($_SESSION['admin'])){
     header('location:home.php');
   }
+  else if(isset($_SESSION['manager'])){
+	header('location:manager_home.php');
+  }
 ?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition login-page">
@@ -23,11 +26,19 @@
             <input type="password" class="form-control" name="password" placeholder="input Password" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+          <div class="form-group has-feedback">
+            <select class="form-control" name="acctype" id="acctype" required>
+				<option value="">Select account type</option>
+  					<option value="Programmer">Programmer</option>
+  					<option value="Manager">Manager</option>
+  					<option value="Admin">Admin</option>
+				</select>
+          </div>
       		<div class="row">
     			<div class="col-xs-4">
           			<button type="submit" class="btn btn-primary btn-block btn-flat" name="login"><i class="fa fa-sign-in"></i> Sign In</button>
         		</div>
-				<a href="../admin/index2.php" class="text-decoration-none">Sign in as manager?</a>
+				<!-- <a href="../admin/index2.php" class="text-decoration-none">Sign in as manager?</a> -->
       		</div>
     	</form>
   	</div>

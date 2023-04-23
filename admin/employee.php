@@ -57,6 +57,7 @@
                   <th>Name</th>
                   <th>Position</th>
                   <th>Department</th>
+                  <!-- <th>Supervisor</th> -->
                   <th>Schedule</th>
                   <th>Member Since</th>
                   <th>Tools</th>
@@ -73,11 +74,13 @@
                           <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
                           <td><?php echo $row['description']; ?></td>
                           <td><?php echo $row['name']; ?></td>
+                          <!-- <td><?php echo $row['supervisor']; ?></td> -->
                           <td><?php echo date('h:i A', strtotime($row['time_in'])).' - '.date('h:i A', strtotime($row['time_out'])); ?></td>
                           <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
                           <td>
                             <button class="btn btn-success btn-sm create btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa glyphicon glyphicon-plus"></i> Create</button>
-                            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
+                            <button class="btn btn-warning btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
+                            <button class="btn btn-primary btn-sm assign btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-arrow-left"></i> Assign to</button>
                             <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-trash"></i> Delete</button>
                           </td>
                         </tr>
@@ -99,6 +102,12 @@
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){
+  $('.assign').click(function(e){
+    e.preventDefault();
+    $('#assign').modal('show');
+    var id = $(this).data('id');
+    getRow(id);
+  });
   $('.create').click(function(e){
     e.preventDefault();
     $('#create').modal('show');
@@ -136,16 +145,23 @@ function getRow(id){
     dataType: 'json',
     success: function(response){
       $('.empid').val(response.empid);
+      // $('.supervisor').val(response.employee_id);
+      // $('#supervisor').val(response.employee_id);
       $('.employee_id').html(response.employee_id);
       $('.del_employee_name').html(response.firstname+' '+response.lastname);
       $('#employee_name').html(response.firstname+' '+response.lastname);
       $('#edit_firstname').val(response.firstname);
-      $('.id').val(response.employee_id);
-      $('#id').val(response.employee_id);
       $('#edit_lastname').val(response.lastname);
       $('#edit_address').val(response.address);
+      $('#user_firstname').val(response.firstname);
+      $('#user_lastname').val(response.lastname);
+      $('#user_photo').val(response.photo);
       $('#datepicker_edit').val(response.birthdate);
       $('#edit_contact').val(response.contact_info);
+      $('.id').val(response.employee_id);
+      $('#id').val(response.employee_id);
+      $('.positionid').val(response.position_id);
+      $('#positionid').val(response.position_id);
       $('#gender_val').val(response.gender).html(response.gender);
       $('.position').val(response.position_id);
       $('#position_val').val(response.position_id).html(response.description);
