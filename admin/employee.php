@@ -82,6 +82,7 @@
                             <button class="btn btn-warning btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
                             <button class="btn btn-primary btn-sm assign btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-arrow-left"></i> Assign to</button>
                             <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-trash"></i> Delete</button>
+                            <!-- <button class="btn btn-info btn-sm generate btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-plus"></i> Generate QR Code</button> -->
                           </td>
                         </tr>
                       <?php
@@ -125,6 +126,12 @@ $(function(){
   $('.delete').click(function(e){
     e.preventDefault();
     $('#delete').modal('show');
+    var id = $(this).data('id');
+    getRow(id);
+  });
+  $('.generate').click(function(e){
+    e.preventDefault();
+    $('#generate').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });

@@ -356,6 +356,44 @@
     </div>
 </div>
 
+<!-- Generate QR Code -->
+<div class="modal fade" id="generate">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          	<div class="modal-header">
+            	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              		<span aria-hidden="true">&times;</span></button>
+            	<h4 class="modal-title"><b><span class="employee_id"></span></b></h4>
+          	</div>
+          	<div class="modal-body">
+            	<form class="form-horizontal" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            		<input type="hidden" class="empid" name="id">
+                  <div class="qr-field">
+                    <h2 style="text-align:center">QR Code Result: </h2>
+                    <center>
+                      <div class="qrframe" style="border:2px solid black; width:210px; height:210px;">
+                          <?php echo '<img src="temp/'. @$filename.'.png" style="width:200px; height:200px;"><br>'; ?>
+                      </div>
+                      <a class="btn btn-primary submitBtn" style="width:210px; margin:5px 0;" href="download.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
+                    </center>
+                  </div>
+                  <div class="col-sm-9">
+                    <label>Generate QR Code</label>
+                    <input type="text" class="form-control" name="msg" style="width:20em;" value="<?php echo @$body; ?>" required pattern="[a-zA-Z0-9 .]+" placeholder="Enter employee ID"></textarea>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="submit" name="submit" class="btn btn-primary submitBtn" style="width:20em; margin:0;" />
+                  </div>
+          	</div>
+          	<div class="modal-footer">
+            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+            	<!-- <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button> -->
+            	</form>
+          	</div>
+        </div>
+    </div>
+</div>
+
 <!-- Update Photo -->
 <div class="modal fade" id="edit_photo">
     <div class="modal-dialog">
