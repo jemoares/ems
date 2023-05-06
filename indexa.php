@@ -18,9 +18,9 @@
             </select>
           </div>
       		<div class="form-group has-feedback">
-        		<input type="text" class="form-control input-lg" id="text" readonly="" name="text" placeholder="Scan QR Code" required>
-            <video id="preview" width="100%"></video>
-        		<!-- <input type="text" class="form-control input-lg" id="employee" name="employee" required> -->
+        		<!-- <input type="text" class="form-control input-lg" id="text" readonly="" name="text" placeholder="Scan QR Code" required> -->
+            <!-- <video id="preview" width="100%"></video> -->
+        		<input type="text" class="form-control input-lg" id="employee" name="employee" required>
         		<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       		</div>
       		<div class="row">
@@ -43,21 +43,21 @@
 	
 <?php include 'scripts.php' ?>
 <script type="text/javascript">
-  let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
-  Instascan.Camera.getCameras().then(function(cameras){
-    if(cameras.length > 0){
-      scanner.start(cameras[0]);
-    }else{
-      alert('No cameras found');
-    }
+  // let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
+  // Instascan.Camera.getCameras().then(function(cameras){
+  //   if(cameras.length > 0){
+  //     scanner.start(cameras[0]);
+  //   }else{
+  //     alert('No cameras found');
+  //   }
 
-  }).catch(function(e){
-    console.error(e);
-  });
+  // }).catch(function(e){
+  //   console.error(e);
+  // });
 
-  scanner.addListener('scan', function(c){
-    document.getElementById('text').value=c;
-  });
+  // scanner.addListener('scan', function(c){
+  //   document.getDocumentById('text').value=c;
+  // });
 
 $(function() {
   var interval = setInterval(function() {
@@ -84,7 +84,7 @@ $(function() {
           $('.alert').hide();
           $('.alert-success').show();
           $('.message').html(response.message);
-          $('#text').val('');
+          $('#employee').val('');
         }
       }
     });
