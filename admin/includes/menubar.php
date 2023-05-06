@@ -36,7 +36,11 @@
         </li>
         <!-- <li><a href="deduction.php"><i class="fa fa-file-text"></i> Deductions</a></li> -->
         <li><a href="position.php"><i class="fa fa-suitcase"></i> Positions</a></li>
+<<<<<<< HEAD
         <li><a href="/ems/QR/index.php"><i class="fa fa-suitcase"></i> QR Code Generator</a></li>
+=======
+        <li><a href=".php"><i class="fa fa-suitcase"></i> QR Code Generator</a></li>
+>>>>>>> f18037752c7ada2392a0384922e36e24f0f00091
         <li class="header">PRINTABLES</li>
         <!-- <li><a href="payroll.php"><i class="fa fa-files-o"></i> <span>Payroll</span></a></li> -->
         <li><a href="schedule_employee.php"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>

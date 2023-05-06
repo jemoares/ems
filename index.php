@@ -10,6 +10,7 @@
   	<div class="login-box-body">
     	<h4 class="login-box-msg">Enter Employee ID</h4>
 
+    	<!-- <form action="attendance.php" method="post" id="attendance"> -->
     	<form id="attendance">
           <div class="form-group">
             <select class="form-control" name="status">
@@ -18,15 +19,15 @@
             </select>
           </div>
       		<div class="form-group has-feedback">
-        		<input type="text" class="form-control input-lg" id="text" readonly="" name="text" placeholder="Scan QR Code" required>
+        		<input type="text" class="form-control input-lg" id="employee" readonly="" name="employee" placeholder="Scan QR Code" required>
             <video id="preview" width="100%"></video>
         		<!-- <input type="text" class="form-control input-lg" id="employee" name="employee" required> -->
         		<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       		</div>
       		<div class="row">
-    			<div class="col-xs-4">
+    			<!-- <div class="col-xs-4">
           			<button type="submit" class="btn btn-primary btn-block btn-flat" name="signin"><i class="fa fa-sign-in"></i> Sign In</button>
-        		</div>
+        		</div> -->
       		</div>
     	</form>
   	</div>
@@ -56,19 +57,10 @@
   });
 
   scanner.addListener('scan', function(c){
-    document.getElementById('text').value=c;
-  });
-
-$(function() {
-  var interval = setInterval(function() {
-    var momentNow = moment();
-    $('#date').html(momentNow.format('dddd').substring(0,3).toUpperCase() + ' - ' + momentNow.format('MMMM DD, YYYY'));  
-    $('#time').html(momentNow.format('hh:mm:ss A'));
-  }, 100);
-
-  $('#attendance').submit(function(e){
-    e.preventDefault();
-    var attendance = $(this).serialize();
+    document.getElementById('employee').value=c;
+    // document.forms[0].submit();
+    $(document).ready(function() {
+    var attendance = $('#attendance').serialize();
     $.ajax({
       type: 'POST',
       url: 'attendance.php',
@@ -84,12 +76,23 @@ $(function() {
           $('.alert').hide();
           $('.alert-success').show();
           $('.message').html(response.message);
-          $('#text').val('');
+          $('#employee').val('');
         }
       }
     });
   });
     
+  });
+
+$(function() {
+  var interval = setInterval(function() {
+    var momentNow = moment();
+    $('#date').html(momentNow.format('dddd').substring(0,3).toUpperCase() + ' - ' + momentNow.format('MMMM DD, YYYY'));  
+    $('#time').html(momentNow.format('hh:mm:ss A'));
+  }, 100);
+
+  
+
 });
 </script>
 </body>
