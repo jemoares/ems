@@ -58,7 +58,7 @@
           <div class="small-box bg-aqua">
             <div class="inner">
               <?php
-                $sql = "SELECT * FROM employees";
+                $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.supervisor_id=attendance.employee_id WHERE attendance.employee_id = employees.supervisor_id ORDER BY attendance.date DESC, attendance.time_in DESC";
                 $query = $conn->query($sql);
 
                 echo "<h3>".$query->num_rows."</h3>";
@@ -125,7 +125,7 @@
           <div class="small-box bg-red">
             <div class="inner">
               <?php
-                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 0";
+                $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.supervisor_id=attendance.employee_id WHERE attendance.employee_id = employees.supervisor_id ";
                 $query = $conn->query($sql);
 
                 echo "<h3>".$query->num_rows."</h3>"

@@ -78,11 +78,21 @@
                           <td><?php echo date('h:i A', strtotime($row['time_in'])).' - '.date('h:i A', strtotime($row['time_out'])); ?></td>
                           <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
                           <td>
-                            <button class="btn btn-success btn-sm create btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa glyphicon glyphicon-plus"></i> Create</button>
+                            <?php
+                              if($row['position_id'] == 3)
+                              {
+                                echo"<button class='btn btn-success btn-sm create btn-flat' data-id='". $row['empid'] . "'><i class='fa glyphicon glyphicon-plus'></i> Create</button>";                       
+                              }
+                            ?>
                             <button class="btn btn-warning btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
-                            <button class="btn btn-primary btn-sm assign btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-arrow-left"></i> Assign to</button>
+                            <?php
+                              if($row['position_id'] != 3)
+                              {
+                                echo"<button class='btn btn-primary btn-sm assign btn-flat' data-id='". $row['empid'] . "'><i class='fa fa-arrow-left'></i> Assign to</button>";
+                              }
+                            ?>
                             <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-trash"></i> Delete</button>
-                            <!-- <button class="btn btn-info btn-sm generate btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-plus"></i> Generate QR Code</button> -->
+                            <!-- <button class="btn btn-info btn-sm report btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-file"></i> Report</button> -->
                           </td>
                         </tr>
                       <?php
@@ -129,9 +139,9 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
-  $('.generate').click(function(e){
+  $('.report').click(function(e){
     e.preventDefault();
-    $('#generate').modal('show');
+    $('#report').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
@@ -152,8 +162,8 @@ function getRow(id){
     dataType: 'json',
     success: function(response){
       $('.empid').val(response.empid);
-      // $('.supervisor').val(response.employee_id);
-      // $('#supervisor').val(response.employee_id);
+      $('.supervisor').val(response.empid);
+      // $('supervisor').val(response.employee_id);
       $('.employee_id').html(response.employee_id);
       $('.del_employee_name').html(response.firstname+' '+response.lastname);
       $('#employee_name').html(response.firstname+' '+response.lastname);
@@ -176,6 +186,51 @@ function getRow(id){
       $('#schedule_val').val(response.schedule_id).html(response.time_in+' - '+response.time_out);
     }
   });
+
+  // $('.input-daterange').datepicker({
+  //   todayBtn:"linked",
+  //   format:"yyyy-mm-dd",
+  //   autoclose:true,
+  //   container: '#report modal-body'
+  // });
+  // $(document).on('click', '.report_button', function(){
+  //   var employee_id = $(this).attr('id');
+  //   $('#employee_id').val(employee_id);
+  //   $('#report').modal('show');
+  // });
+
+  // $('#create_report').click(function(){
+  //   var employee_id = $('employee_id').val();
+  //   var from_date = $('#from_date').val();
+  //   var to_date = $('#to_date').val();
+  //   var error = 0;
+  //   if (from_date == '')
+  //   {
+  //     $('#error_from_date').text('From Date is Required');
+  //     error++;
+  //   }
+  //   else 
+  //   {
+  //     $('#error_from_date').text('');
+  //   }
+  //   if(to_date == '')
+  //   {
+  //     $('#error_to_date').text('To Date is Required');
+  //     error++;
+  //   }
+  //   else
+  //   {
+  //     $('#error_to_date').text('');
+  //   }
+
+  //   if($error == 0)
+  //   {
+  //     $('#from_date').val('');
+  //     $('#to_date').val('');
+  //     $('#report').modal('hide');
+  //     window.open(location.href
+  //   }
+  // });
 }
 </script>
 </body>

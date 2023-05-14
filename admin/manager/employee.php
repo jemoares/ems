@@ -63,7 +63,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT *, employees.id AS empid FROM employees LEFT JOIN position ON position.id=employees.position_id LEFT JOIN departments ON departments.id=employees.department_id LEFT JOIN schedules ON schedules.id=employees.schedule_id";
+                    $sql = "SELECT *, employees.employee_id AS empid, attendance.id AS attid FROM attendance LEFT JOIN employees ON employees.supervisor_id=attendance.employee_id LEFT JOIN position ON position.id=employees.position_id LEFT JOIN departments ON departments.id=employees.department_id LEFT JOIN schedules ON schedules.id=employees.schedule_id WHERE attendance.employee_id = employees.supervisor_id";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       ?>

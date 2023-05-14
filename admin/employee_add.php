@@ -25,7 +25,7 @@
 		for($i = 0; $i < 3; $i++){
 			$numbers .= $i;
 		}
-		$employee_id = $department.substr(str_shuffle($numbers), 0, 9);
+		$employee_id = $department.substr(str_shuffle($numbers), 0, 10);
 		//
 		
 		$sql = "INSERT INTO employees (employee_id, firstname, lastname, address, birthdate, contact_info, gender, position_id, department_id, supervisor_id, schedule_id, photo, created_on) 

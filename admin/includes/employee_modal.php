@@ -287,15 +287,16 @@
                     <label for="supervisor" class="col-sm-3 control-label">Supervisor</label>
                     <div class="col-sm-9">
                       <select class="form-control" name="supervisor" id="supervisor">
-                        <option value="">- Select -</option>
+                          <option value="">- Select -</option>
                         <?php 
-                          $sql = "SELECT * FROM employees WHERE schedule_id = 1 AND position_id = 3";
-                          // $sql = "SELECT employees.*, schedules.* FROM employees JOIN schedules ON employees.schedule_id = schedules.id WHERE employees.position_id = 3
-                          // UNION SELECT employees.*, schedules.* FROM employees JOIN schedules ON employees.schedule_id = schedules.id WHERE employees.schedule_id = 1 ";
+                          // $sql = "SELECT * FROM employees 
+                          // WHERE position_id = 3 
+                          // AND schedule_id = (SELECT schedule_id FROM employees WHERE id = 41)";
+                          $sql = "SELECT * FROM employees WHERE position_id = 3";
                           $query = $conn->query($sql);
                           while ($row = $query->fetch_assoc()){
                             echo "
-                              <option value='" . $row["employee_id"] . "'>" . $row["firstname"].' '.$row["lastname"] . "</option>
+                              <option value='" . $row["id"] . "'>" . $row["firstname"].' '.$row["lastname"] . "</option>
                             ";
                         }
                         ?>
@@ -356,8 +357,8 @@
     </div>
 </div>
 
-<!-- Generate QR Code -->
-<div class="modal fade" id="generate">
+<!-- Report -->
+<!-- <div class="modal fade" id="report">
     <div class="modal-dialog">
         <div class="modal-content">
           	<div class="modal-header">
@@ -366,33 +367,23 @@
             	<h4 class="modal-title"><b><span class="employee_id"></span></b></h4>
           	</div>
           	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            		<input type="hidden" class="empid" name="id">
-                  <div class="qr-field">
-                    <h2 style="text-align:center">QR Code Result: </h2>
-                    <center>
-                      <div class="qrframe" style="border:2px solid black; width:210px; height:210px;">
-                          <?php echo '<img src="temp/'. @$filename.'.png" style="width:200px; height:200px;"><br>'; ?>
-                      </div>
-                      <a class="btn btn-primary submitBtn" style="width:210px; margin:5px 0;" href="download.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
-                    </center>
-                  </div>
-                  <div class="col-sm-9">
-                    <label>Generate QR Code</label>
-                    <input type="text" class="form-control" name="msg" style="width:20em;" value="<?php echo @$body; ?>" required pattern="[a-zA-Z0-9 .]+" placeholder="Enter employee ID"></textarea>
-                  </div>
-                  <div class="col-sm-9">
-                    <input type="submit" name="submit" class="btn btn-primary submitBtn" style="width:20em; margin:0;" />
-                  </div>
+            	<div class="input-daterange">
+                <input type="text" name="form-date" id="from_date" class="form-control" placeholder="From Date" readonly/>
+                <span id="error_from_date" class="text-danger"></span>
+                <input type="text" name="to_date" id="to_date" class="form-control" placeholder="To Date" readonly />
+                <span id="error_to_date" class="text-danger"></span>
+              </div>
           	</div>
           	<div class="modal-footer">
+              <input type="hidden" name="employee_id" id="id">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-            	<!-- <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button> -->
-            	</form>
+              <button type="button" name="create_report" id="create_report" class="btn btn-success btn-sm"> Create Report</button>
+              <!-- <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button> -->
+            	
           	</div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Update Photo -->
 <div class="modal fade" id="edit_photo">

@@ -29,7 +29,7 @@
           <div class="form-group has-feedback">
             <select class="form-control" name="acctype" id="acctype" required>
 				<option value="">Select account type</option>
-  					<option value="Programmer">Programmer</option>
+  					<!-- <option value="Programmer">Programmer</option> -->
   					<option value="Manager">Manager</option>
   					<option value="Admin">Admin</option>
 				</select>
